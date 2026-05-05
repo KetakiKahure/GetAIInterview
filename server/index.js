@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import connectDb from './config/connectDb.js';
 import cookieParser from 'cookie-parser';
 dotenv.config();
-import cors from 'cors';
+// import cors from 'cors';
 import authRouter from './routes/auth.route.js';
 import userRouter from "./routes/user.route.js"; 
 import interviewRouter from './routes/interview.route.js';
@@ -17,10 +17,19 @@ const app=express();
 //     }
 // ))
 
+// app.use(cors({
+//   origin: ["http://localhost:5173", "https://getaiinterview-client.onrender.com"],
+//   credentials: true
+// }));
+
+const cors = require("cors");
+
 app.use(cors({
-  origin: ["http://localhost:5173", "https://getaiinterview-client.onrender.com"],
+  origin: "https://getaiinterview-client.onrender.com",
   credentials: true
 }));
+
+app.options("*", cors());
 
 app.use(express.json());
 app.use(cookieParser());
